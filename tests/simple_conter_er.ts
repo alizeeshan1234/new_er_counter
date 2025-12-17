@@ -90,6 +90,30 @@ describe("simple_conter_er", () => {
     }).signers([provider.wallet.payer]).rpc();
 
     console.log(`Increment counter signature: ${increment_counter_on_chain}`)
+  });
+
+  it.skip("Fail increment and commit counter", async () => {
+    const increment_counter_on_chain = await program.methods.incrementCounter().accountsPartial({
+      signer: provider.wallet.publicKey,
+      counter: counterAccount
+    }).signers([provider.wallet.payer]).rpc();
+
+    console.log(`Increment counter signature: ${increment_counter_on_chain}`);
+
+    await sleepWithAnimation(25);
+
+    const tx = await program.methods.commitCounter().accountsPartial({
+      signer: provider.wallet.publicKey,
+      counter: counterAccount
+    }).transaction();
+
+    const signature = await sendMagicTransaction(
+      routerConnection,
+      tx,
+      [provider.wallet.payer],
+    );
+
+    console.log(`Commit signature: ${signature}`);
   })
 });
 

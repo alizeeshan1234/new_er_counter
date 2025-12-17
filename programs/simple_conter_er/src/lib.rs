@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("EKpNvKTXRa3b8qHY9WgJaeVpRBqiELRm2PTygRB3CMLG");
+declare_id!("ExEH4SvKCwkL1Pv2CHKAeTuQxtZvAS8Z8UsfY1dLpfAh");
 
 use ephemeral_rollups_sdk::anchor::{commit, delegate, ephemeral};
 use ephemeral_rollups_sdk::cpi::DelegateConfig;
@@ -8,7 +8,7 @@ use ephemeral_rollups_sdk::cpi::DelegateConfig;
 #[ephemeral]
 #[program]
 pub mod simple_conter_er {
-    use ephemeral_rollups_sdk::ephem::{commit_accounts, commit_and_undelegate_accounts};
+    use ephemeral_rollups_sdk::ephem::commit_and_undelegate_accounts;
 
     use super::*;
 
