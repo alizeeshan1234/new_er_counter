@@ -1,6 +1,6 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
-import { SimpleConterEr } from "../target/types/simple_conter_er";
+import { SimpleCounterEr } from "../target/types/simple_counter_er";
 import { PublicKey, SystemProgram } from "@solana/web3.js";
 import {
   GetCommitmentSignature,
@@ -10,11 +10,11 @@ import {
 import { sendMagicTransaction } from "magic-router-sdk";
 import { web3 } from "@coral-xyz/anchor";
 
-describe("simple_conter_er", () => {
+describe("simple_counter_er", () => {
   let provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
-  const program = anchor.workspace.simpleConterEr as Program<SimpleConterEr>;
+  const program = anchor.workspace.simpleCounterEr as Program<SimpleCounterEr>;
 
   let counterAccount: PublicKey;
 

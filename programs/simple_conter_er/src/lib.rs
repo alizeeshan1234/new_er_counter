@@ -1,13 +1,13 @@
 use anchor_lang::prelude::*;
 
-declare_id!("5NGwDfpC5kRsePbGpPmAHqkKrtUvRzCCVg4padJLAuVp");
+declare_id!("BNSuw8GSUcDypTyJFTc1SDfKVv6fGUd4kndomtBKUqMu");
 
 use ephemeral_rollups_sdk::anchor::{commit, delegate, ephemeral};
 use ephemeral_rollups_sdk::cpi::DelegateConfig;
 
 #[ephemeral]
 #[program]
-pub mod simple_conter_er {
+pub mod simple_counter_er {
     use ephemeral_rollups_sdk::ephem::{commit_accounts, commit_and_undelegate_accounts};
 
     use super::*;
