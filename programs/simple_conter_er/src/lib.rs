@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("ExEH4SvKCwkL1Pv2CHKAeTuQxtZvAS8Z8UsfY1dLpfAh");
+declare_id!("5NGwDfpC5kRsePbGpPmAHqkKrtUvRzCCVg4padJLAuVp");
 
 use ephemeral_rollups_sdk::anchor::{commit, delegate, ephemeral};
 use ephemeral_rollups_sdk::cpi::DelegateConfig;
@@ -8,7 +8,7 @@ use ephemeral_rollups_sdk::cpi::DelegateConfig;
 #[ephemeral]
 #[program]
 pub mod simple_conter_er {
-    use ephemeral_rollups_sdk::ephem::commit_and_undelegate_accounts;
+    use ephemeral_rollups_sdk::ephem::{commit_accounts, commit_and_undelegate_accounts};
 
     use super::*;
 
@@ -42,7 +42,7 @@ pub mod simple_conter_er {
         Ok(())
     }
 
-    pub fn commit_counter(ctx: Context<CommitCounter>) -> Result<()> {
+    pub fn commit_and_undelegate_counter(ctx: Context<CommitCounter>) -> Result<()> {
         commit_and_undelegate_accounts(
             &ctx.accounts.signer, 
             vec![&ctx.accounts.counter.to_account_info()], 
@@ -51,6 +51,20 @@ pub mod simple_conter_er {
         )?;
 
         msg!("Commited Accounts SUccessfully!");
+        Ok(())
+    }
+
+    pub fn commit_counter(ctx: Context<CommitCounter>) -> Result<()> {
+
+        commit_accounts(
+            &ctx.accounts.signer, 
+            vec![&ctx.accounts.counter.to_account_info()], 
+            &ctx.accounts.magic_context, 
+            &ctx.accounts.magic_program
+        )?;
+
+        msg!("Commited accounts successfully!");
+
         Ok(())
     }
 

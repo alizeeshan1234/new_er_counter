@@ -68,7 +68,7 @@ describe("simple_conter_er", () => {
     await new Promise((resolve) => setTimeout(resolve, 10000));
   });
 
-  it("COmmit and increment counter", async () => {
+  it.skip("Commit and increment counter", async () => {
     const tx = await program.methods.commitCounter().accountsPartial({
       signer: provider.wallet.publicKey,
       counter: counterAccount
@@ -81,6 +81,30 @@ describe("simple_conter_er", () => {
     );
 
     console.log(`Commit signature: ${signature}`);
+
+    await sleepWithAnimation(25);
+
+    const increment_counter_on_chain = await program.methods.incrementCounter().accountsPartial({
+      signer: provider.wallet.publicKey,
+      counter: counterAccount
+    }).signers([provider.wallet.payer]).rpc();
+
+    console.log(`commit and increment counter signature: ${increment_counter_on_chain}`)
+  })
+
+  it("COmmit, Undelegate and increment counter", async () => {
+    const tx = await program.methods.commitAndUndelegateCounter().accountsPartial({
+      signer: provider.wallet.publicKey,
+      counter: counterAccount
+    }).transaction();
+
+    const signature = await sendMagicTransaction(
+      routerConnection,
+      tx,
+      [provider.wallet.payer],
+    );
+
+    console.log(`Commit and undelegate signature: ${signature}`);
 
     await sleepWithAnimation(25);
 
